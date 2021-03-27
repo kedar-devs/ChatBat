@@ -18,10 +18,12 @@ class SubjectModel{
         }
 
     }
+    //creates User Id
     createId(){
         return new Date().getTime().toString()
 
     }
+    //Creating New Users Subject
     async create(data){
        const totalData=await this.getAll()
        const id=this.createId()
@@ -42,26 +44,26 @@ class SubjectModel{
 
 
     }
-    async putAssignment(data,id){
+    async putAssignment(data){
         const updatedData=await this.getAll()
-        const Assid=this.createId()
+        const Aid=this.createId()
         // AddAssign.push({...data,Assid})
         for(var i=0;i<updatedData.length;i++){
-            if(updatedData[i].id==id)
+            if(updatedData[i].id==data.id)
             {
                 if(data.status==true){
                     var getaddress=makeCopy(data)
                     var getuRL=getIPAddresses()
-                    data.content=getuRL+getaddress
+                    data.location=getuRL+getaddress
                     data.Aname=data.files.notes.filename
                 }
                 else{
                     console.log(data.file)
-                    data.content=data.files.notes.address
+                    data.location=data.files.notes.address
                     data.Aname=data.files.notes.filename
                 }
 
-                updatedData[i].assignmet.push({...data,Assid})
+                updatedData[i].assignmet.push({...data,Aid})
 
             }
         }
