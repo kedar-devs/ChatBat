@@ -40,10 +40,60 @@ class SubjectModel{
         const data=await this.getAll()
         return data.find(subjects=>subjects.id===id)
     }
-    async getAllAssignment(){
-
-
+    async getAllAssignment(id){
+        const GetData = await this.getOne(id)
+        return GetData.assignment
     }
+    async GetOneAssignment(id,aid){
+        const reqData=getAllAssignment(id)
+        for(var i=0;i<reqData.length;i++)
+        {
+            if(reqData[i].Aid===aid){
+                return reqData[i]
+            }
+        }
+        /*  OR 
+            return reqData.find(assignment=>assignment.Aid===aid)
+        */
+    }
+    async putNotes(data){
+        const UpdateData=await this.getOne(data.id)
+        const Nid=this.createId()
+        if(data.status==true){
+            var getaddress=makeCopy(data)
+            var getuRL=getIPAddresses()
+            data.loc=getuRL+getaddress
+            data.fname=data.files.notes.filename
+            
+        }
+        else{
+            data.location=data.files.notes.address
+            data.fname=data.files.notes.filename
+        }
+        UpdateData.notes.push({...data,Nid})
+        await fs.promises.writeFile(this.path,JSON.stringify(updatedData))
+        const NewData=this.getAll()
+        console.log(NewData)
+    }
+
+    async putLink(data){
+        const UpdateData=await this.getOne(data.id)
+        UpdatedData.links.push(data)
+        await fs.promises.writeFile(this.path,JSON.stringify(updatedData))
+        // const NewData=this.getAll()
+        // console.log(NewData)
+    }
+    async putGrades(data){
+        const UpdateData=await this.getOne(data.id)
+        UpdateData.grades.push(data)
+        await fs.promises.writeFile(this.path,JSON.stringify(updatedData))
+    }
+    async expect(data){
+        const UpdateData=await this.getOne(data.id)
+        UpdateData.expectedGrade=data.expect
+        await fs.promises.writeFile(this.path,JSON.stringify(updatedData))
+    }
+
     async putAssignment(data){
         const updatedData=await this.getAll()
         const Aid=this.createId()
@@ -70,7 +120,7 @@ class SubjectModel{
         await fs.promises.writeFile(this.path,JSON.stringify(updatedData))
         const NewData=this.getAll()
         console.log(NewData)
-
+        
     }
     
     async makeCopy(data){
@@ -78,7 +128,7 @@ class SubjectModel{
         let sampleFile;
         let uploadPath;
         
-        if (!req.files || Object.keys(req.files).length === 0) {
+        if (!data.files || Object.keys(data.files).length === 0) {
           return res.status(400).send('No files were uploaded.');
         }
         fs.access('./data/Uploads',(err)=>{
@@ -86,7 +136,7 @@ class SubjectModel{
                 fs.mkdirSync('./data/Uploads')
             }
         })
-        sampleFile = req.files.notes;
+        sampleFile = data.files.notes;
         // uploadPath=path.join(__dirname+'./../data/Uploads'+sampleFile.name)
         uploadPath='./data/Uploads/'+sampleFile.name
         await sampleFile.mv(uploadPath,function(err) {
@@ -131,6 +181,7 @@ class SubjectModel{
                     var getaddress=makeCopy(data)
                     var getuRL=getIPAddresses()
                     data.link=getuRL+getaddress
+                    console.log(data.link)
                     data.filename=data.files.notes.filename
                 }
                 else{
