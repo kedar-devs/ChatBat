@@ -13,12 +13,25 @@ const OtpSender=(no,otp)=>{
     const to=no
     const text = `OTP CODE:${otp} Valid till 5 min`;
 
-    nexmo.message.sendSms(from, to, text)
+    nexmo.message.sendSms(from, to, text,(err,responseData)=>{
+        if (err) {
+            console.log(err);
+        } else {
+            console.log(responseData.messages[0])
+            if(responseData.messages[0]['status'] === "0") {
+                console.log("Message sent successfully.");
+                return res.status(200).send('Sucess')
+            } else {
+                console.log(`Message failed with error: ${responseData.messages[0]['error-text']}`);
+                return res.status(401).send(`Message failed with error: ${responseData.messages[0]['error-text']}`)
+            }
+    }
+})
+    
 }
 exports.register=async(req,res)=>{
     if(req.body){
         res.send('Empty body not Allowed')
-
     }
     console.log(req.body)
    
@@ -39,8 +52,8 @@ exports.register=async(req,res)=>{
         password:sha256(password+process.env.SALT),
         otp,
         email})
-        OtpSender(user.mobileno,user.otp)
-    await user.save()
+        await OtpSender(user.mobileno,user.otp)
+        await user.save()
         res.status(200).send("VALIDATION WILL BE DONE SHORTLY")
 
 }
@@ -57,4 +70,10 @@ exports.validator=async(req,res)=>{
                  let token=jwt.sign(payload,process.env.SECRET_KEY)
                  res.status(200).send({token})       
     }
+}
+exports.login=async(req,res)=>{
+    const {mobileno,password} = req.body
+    const user=await User.findOne({mobileno,password:sha256(password+process.env.SALT)})
+    if(!user) throw 'No User was found with those Credentials'
+    
 }
