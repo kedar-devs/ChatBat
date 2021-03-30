@@ -66,7 +66,7 @@ exports.validator=async(req,res)=>{
         res.send('No User Found')
     }
     else{
-                let payload={subject:FoundUser.mobileno}
+                let payload={id:user._id}
                  let token=jwt.sign(payload,process.env.SECRET_KEY)
                  res.status(200).send({token})       
     }
@@ -75,5 +75,19 @@ exports.login=async(req,res)=>{
     const {mobileno,password} = req.body
     const user=await User.findOne({mobileno,password:sha256(password+process.env.SALT)})
     if(!user) throw 'No User was found with those Credentials'
+    else{
+        let payload={id:user._id}
+                 let token=jwt.sign(payload,process.env.SECRET_KEY)
+                 res.status(200).send({token})
+    }
     
+}
+
+exports.getAll=async(req,res)=>{
+    const user=await User.find()
+    res.status(200).send({user})
+}
+exports.getOne=async(req,res)=>{
+    const user=await User.findOne({_id:req.params.id})
+    res.status(200).send({user})
 }
