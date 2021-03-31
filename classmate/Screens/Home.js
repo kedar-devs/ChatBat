@@ -9,15 +9,15 @@ import { StyleSheet, Text, View, Animated,Button  } from 'react-native';
                 toValue:1,
                 duration: 4000
             }).start();
-            return()=>{
+            setTimeout(()=>{
                 Animated.timing(
                  fadeAnim,
                  {
                    toValue: 0,
-                   duration: 1000,
+                   duration: 2000,
                  }
                ).start();
-               }
+               },3000)
            
     },[fadeAnim])
     return(
@@ -37,16 +37,24 @@ export default function Home({navigation}){
   const GoSub=()=>{
     navigation.navigate('SubjectScreen')
    }
+   const Gologin=()=>{
+     navigation.navigate('LoginScreen')
+   }
+   const Gosignin=()=>{
+     navigation.navigate('SignuppScreen')
+   }
     return(
         <View style={styles.container}>
             <FadingView style={{width: 250, height: 50, backgroundColor: 'black'}}>
                     <Text style={styles.Heading}>Class-Mate</Text>
-                    <Button 
-                    style={styles.buttonMash}
-                    onPress={GoSub()}
-                    title="Start"
-                    />
             </FadingView>
+            <Button title="Sign-Up" onPress={()=>Gosignin}>
+            </Button>
+            <Button title="Login" onPress={()=>Gologin}/>
+            <Text>if you wanna continue without login press</Text>
+            <TouchableOpacity onPress={()=>GoSub}>
+              skip
+            </TouchableOpacity>
         </View>
     )
 }

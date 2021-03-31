@@ -11,10 +11,9 @@ export default function AddButton(){
 const styles=StyleSheet.create({
   ButtonPos:{
     position: "absolute",
-    fontSize: "50px",
-    bottom: "10px",
-    right: "20px",
+    width: "51px",
+    height: "50px",
+    left: "301px",
+    top: "518px",
   }
-
-
 })

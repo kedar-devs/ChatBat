@@ -7,11 +7,11 @@ import Plus from './../Shared/AddButton'
 
 const Form = t.form.Form;
 const SubjectData=t.struct({
-    title:t.String
+    sname:t.String
 })
 export default function Subject(){
     const [open,changeOpen]=useState(false)
-    const [submap,ChangeSub]=useState('')
+    const [submap,ChangeSub]=useState([])
     useEffect(() => {
         getAllSubject()
     },[])
@@ -19,11 +19,10 @@ export default function Subject(){
         axios.get('')
         .then(result=>{
             const allSub=result.data
-            changeSub(allSub)
+            ChangeSub(allSub)
         })
         .catch(err=>{
             console.log(err)
-
         })
     }
     const submitter=()=>{
