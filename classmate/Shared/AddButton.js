@@ -4,7 +4,7 @@ import {StyleSheet, View} from 'react-native'
 export default function AddButton(){
     return(
         <View>
-            <Icon type="plus" style={styles.ButtonPos}/>
+            <Icon type="plus" style={styles.ButtonPos} backgroundColor="#3b5998"/>
         </View>
     )
 }

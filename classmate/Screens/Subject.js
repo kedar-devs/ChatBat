@@ -50,7 +50,7 @@ export default function Subject(){
                  }}
                 >
                   <Form type={SubjectData} />
-                  <Button title="Add" onClick={submitter()}/>  
+                  <Button title="Add" onPress={submitter()}/>  
                 </Modal>
                 <Plus onPress={() =>changeOpen(!open)}/>
         </View>
