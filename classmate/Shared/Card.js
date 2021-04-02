@@ -2,12 +2,12 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 const bgarray=[
-    "./../assets/sub1.jpg",
-    "./../assets/sub2.jpg",
-    "./../assets/sub3.jpg",
-    "./../assets/sub4.jpg",
-    "./../assets/sub5.jpg",
-    "./../assets/sub6.jpg",
+    require("./../assets/sub1.jpg"),
+    require("./../assets/sub2.jpg"),
+    require("./../assets/sub3.jpg"),
+    require("./../assets/sub4.jpg"),
+    require("./../assets/sub5.jpg"),
+    require("./../assets/sub6.jpg"),
 ]
 
 export default function Card(props) {
@@ -18,7 +18,7 @@ export default function Card(props) {
         subjects.map((subject,i)=>{
             console.log(subject,i)
             return(
-                <View style={{background: "linear-gradient(to left,rgba(0,0,0,.1),rgba(0,0,0,.5)),url(" +require(bgarray[`${props.i%6}`])+ ")"}}>
+                <View style={{background: "linear-gradient(to left,rgba(0,0,0,.1),rgba(0,0,0,.5)),url(" +bgarray[`${i%6}`]+ ")"}}>
                 <View style={styles.card}>
                     <Text style={styles.cardContent}>
                         {subject.title}
@@ -50,11 +50,7 @@ const styles=StyleSheet.create({
         height: "150px",
         margin: "20px",
         width: "300px",
-        borderRadius: "20px",
-        boxShadow: " 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
-        "& a": {
-            textDecoration:"none"
-        },
+        
          
     },
     cardContent: {

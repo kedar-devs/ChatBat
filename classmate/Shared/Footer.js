@@ -32,20 +32,22 @@ const styles = StyleSheet.create({
         left: "0px",
         top: "575px",
         backgroundColor: "#008000",
-        border: "1px solid #000000",
-        boxSizing:"border-box",
+        borderWidth: 1,
+        borderStyle:"solid",
+        borderColor: "#000000",
+       
     },
     Daddy:{
         
         width:"90px",
         height:"65px"
-    }
+    },
     iconStyling:{
         position:"relative",
         width:"35px",
         height:"31px",
         padding:"14px 28px 20px 28px"
-    }
+    },
     textclass:{
         position: "relative",
         width: "47px",  
@@ -54,8 +56,8 @@ const styles = StyleSheet.create({
         fontFamily: "Roboto monospace",   
         fontStyle: "normal",
         fontWeight: "normal",
-        fontSize: "12px",
-        lineHeight: "14px",
-        color: #000000;
+        fontSize:12,
+        lineHeight: 14,
+        color: "#000000"
     }
 })

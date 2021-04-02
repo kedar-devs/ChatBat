@@ -1,7 +1,7 @@
 import React,{useState} from 'react'
 import { View, Text,StyleSheet,TextInput,TouchableOpacity,Image } from 'react-native'
 import {Ionicons} from "@expo/vector-icons"
-const LoginScreen = () => {
+const LoginScreen = (navigation) => {
     const [usercred,modifyState]=useState('')
     const [password,modifyPassword]=useState('')
 
@@ -9,7 +9,7 @@ const LoginScreen = () => {
         // axios.post()
         // .then()
         // .catch()
-        this.props.navigation.navigate("Chat",{name:usercred})
+        navigation.navigate("Chat",{name:usercred})
     }
 
     return (
@@ -35,7 +35,7 @@ const LoginScreen = () => {
                     </Text>
                     <TextInput placeholder="Password" style={style.input} onChangeText={password=>modifyPassword(password)} type="password" value={password}/>
                 </View>
-                <View style={{alignItem="flex-end",marginTop:64}}>
+                <View style={{marginTop:64}}>
                         <TouchableOpacity style={styles.continue}>
                             <Ionicons name="md-arrow-round-forward" size={24} color="#FFF" />
                         </TouchableOpacity>
@@ -55,7 +55,7 @@ const Styles=StyleSheet.create({
         height:500,
         borderRadius:500/2,
         backgroundColor:"#fff",
-        posiiton:"absolute",
+        position:"absolute",
         left:-120,
         top:-20
     },
@@ -69,7 +69,7 @@ const Styles=StyleSheet.create({
         marginTop:32,
         height:50,
         borderWidth:StyleSheet.hairlineWidth,
-        borderColor:"#3BAB73C",
+        borderColor:"#3BAB73",
         borderRadius:38,
         paddingHorizontal:16,
         color:"#514E5A",
@@ -80,7 +80,7 @@ const Styles=StyleSheet.create({
         height:70,
         borderRadius:70/2,
         backgroundColor:"#9075E3",
-        alignItem:"center",
+        alignItems:"center",
         justifyContent:"center"
     }
 

@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react';
-import { StyleSheet, Text, View, Animated,Button  } from 'react-native';
+import { StyleSheet, Text, View, Animated,Button,TouchableOpacity  } from 'react-native';
 
  const FadingView=(props)=>{
     const fadeAnim = useRef(new Animated.Value(0)).current
@@ -53,7 +53,9 @@ export default function Home({navigation}){
             <Button title="Login" onPress={()=>Gologin}/>
             <Text>if you wanna continue without login press</Text>
             <TouchableOpacity onPress={()=>GoSub}>
+              <Text>
               skip
+              </Text>
             </TouchableOpacity>
         </View>
     )
