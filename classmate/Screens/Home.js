@@ -7,14 +7,16 @@ import { StyleSheet, Text, View, Animated,Button,TouchableOpacity  } from 'react
         Animated.timing(fadeAnim,
             {
                 toValue:1,
-                duration: 4000
+                duration: 4000,
+               
             }).start();
             setTimeout(()=>{
                 Animated.timing(
                  fadeAnim,
                  {
                    toValue: 0,
-                   duration: 2000,
+                   duration: 4000,
+                 
                  }
                ).start();
                },3000)
@@ -35,17 +37,17 @@ import { StyleSheet, Text, View, Animated,Button,TouchableOpacity  } from 'react
 export default function Home({navigation}){
    
   const GoSub=()=>{
-    navigation.navigate('SubjectScreen')
+    navigation.navigate('subject')
    }
    const Gologin=()=>{
-     navigation.navigate('LoginScreen')
+     navigation.navigate('login')
    }
    const Gosignin=()=>{
-     navigation.navigate('SignuppScreen')
+     navigation.navigate('signup')
    }
     return(
         <View style={styles.container}>
-            <FadingView style={{width: 250, height: 50, backgroundColor: 'black'}}>
+            <FadingView style={{width: 250, height: 50, backgroundColor: 'green'}}>
                     <Text style={styles.Heading}>Class-Mate</Text>
             </FadingView>
             <Button title="Sign-Up" onPress={()=>Gosignin}>
@@ -65,16 +67,23 @@ const styles = StyleSheet.create({
       flex: 1, 
       alignItems: 'center',
       justifyContent: 'center',
+      backgroundColor:"#00ff00"
     },
     Heading:{
         fontSize: 28, 
         textAlign: 'center', 
         margin: 10,
         color:'white'
+
     },
     buttonMash:{
+      height:"50px",
+      width:"120px",
+      marginBottom:10,
       alignItems: 'center',
-      color:"#000080"  
+      color:"#000080" ,
+      fontSize:18,
+      backgroundColor:"#FFFFFF",
     }
   });
   
